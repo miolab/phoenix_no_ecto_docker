@@ -1,0 +1,12 @@
+version: "3"
+services:
+  app:
+    build: ./app
+    volumes:
+      - ./app:/usr/src/app
+    ports:
+      - ${PHOENIX_PORT}:4000
+    stdin_open: true
+    tty: true
+    command:
+      sh -c "cd ${PROJECT_NAME} && mix phx.server"
