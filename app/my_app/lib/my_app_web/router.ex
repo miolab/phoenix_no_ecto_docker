@@ -17,6 +17,7 @@ defmodule MyAppWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/watchme", WatchmeController, :index
   end
 
   # Other scopes may use custom stacks.
