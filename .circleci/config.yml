@@ -44,12 +44,6 @@ jobs:
             docker-compose exec app bash -c "cd my_app && mix format --check-formatted"
 
       - run:
-          name: Mix credo (only display logs)
-          command: |
-            set -x
-            docker-compose exec app bash -c "cd my_app && mix credo"
-
-      - run:
           name: Mix test
           command: |
             set -x
