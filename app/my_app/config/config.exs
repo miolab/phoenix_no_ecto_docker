@@ -27,23 +27,7 @@ config :phoenix, :json_library, Jason
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
 
-# Git hooks
-if Mix.env() != :prod do
-  config :git_hooks,
-    auto_install: true,
-    hooks: [
-      pre_commit: [
-        verbose: true,
-        tasks: [
-          {:cmd, "mix format"}
-        ]
-      ],
-      pre_push: [
-        verbose: false,
-        tasks: [
-          {:cmd, "mix test"},
-          {:cmd, "echo 'success!'"}
-        ]
-      ]
-    ]
-end
+use Mix.Config
+config :husky,
+    pre_commit: "mix format && mix credo --strict",
+    pre_push: "mix format --check-formatted && mix credo --strict && mix test"
