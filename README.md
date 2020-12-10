@@ -253,10 +253,18 @@ Randomized with seed 213195
 
 ---
 
-## （参考） プロジェクト・コンテナ環境削除
+## （補足） プロジェクト・コンテナ環境削除
 
 ```terminal
 $ docker-compose down --rmi all --volumes --remove-orphans
 
 $ rm -rf app/my_app
 ```
+
+---
+
+## 参考情報
+
+- Credo
+  - Docs https://hexdocs.pm/credo/overview.html
+  - GitHub https://github.com/rrrene/credo
