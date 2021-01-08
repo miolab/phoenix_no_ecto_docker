@@ -4,13 +4,18 @@
 
 Elixir製Webフレームワーク __Phoenix__ の `--no-ecto`版 __Docker__ 開発環境を構築します
 
----
-
 ## 実行環境・バージョン
 
 - macOS
-- Elixir 1.11.2 (compiled with Erlang/OTP 23)
+- Elixir 1.11.3 (compiled with Erlang/OTP 23)
 - Phoenix 1.5.7
+- Node 14.15.4
+
+## 確認URL
+
+- テスト環境 http://0.0.0.0:4000
+
+---
 
 ## ビルド〜Phoenixプロジェクト作成
 
@@ -112,56 +117,6 @@ $ docker-compose exec app bash -c "cd my_app && mix format"
 ```terminal
 $ docker-compose exec app bash -c "cd my_app && mix test"
 
-==> gettext
-Compiling 1 file (.erl)
-Compiling 20 files (.ex)
-Generated gettext app
-===> Compiling ranch
-===> Compiling telemetry
-==> telemetry_metrics
-Compiling 7 files (.ex)
-Generated telemetry_metrics app
-===> Compiling telemetry_poller
-==> jason
-Compiling 8 files (.ex)
-Generated jason app
-==> phoenix_pubsub
-Compiling 11 files (.ex)
-Generated phoenix_pubsub app
-===> Compiling cowlib
-===> Compiling cowboy
-===> Compiling cowboy_telemetry
-==> mime
-Compiling 2 files (.ex)
-Generated mime app
-==> plug_crypto
-Compiling 5 files (.ex)
-Generated plug_crypto app
-==> plug
-Compiling 1 file (.erl)
-Compiling 41 files (.ex)
-warning: System.stacktrace/0 is deprecated, use __STACKTRACE__ instead
-  lib/plug/conn/wrapper_error.ex:23
-
-Generated plug app
-==> phoenix_html
-Compiling 8 files (.ex)
-Generated phoenix_html app
-==> plug_cowboy
-Compiling 5 files (.ex)
-Generated plug_cowboy app
-==> phoenix
-Compiling 66 files (.ex)
-Generated phoenix app
-==> phoenix_live_view
-Compiling 22 files (.ex)
-Generated phoenix_live_view app
-==> phoenix_live_dashboard
-Compiling 36 files (.ex)
-Generated phoenix_live_dashboard app
-==> my_app
-Compiling 15 files (.ex)
-Generated my_app app
 ...
 
 Finished in 0.3 seconds
