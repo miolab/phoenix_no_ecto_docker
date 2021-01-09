@@ -10,10 +10,10 @@ use Mix.Config
 # Configures the endpoint
 config :my_app, MyAppWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "kgZUUfArFcCYfGlTYoP79lu+En8X2BI2S3XQ4ETEf/dbj6gWmPwUEa1/nQwPivn3",
+  secret_key_base: "2NnogwR6HJV/09fgVhl4d1H/si+VIR9JIA+5cm2qAw7sWVQU8aZ6kslb40yk4qZz",
   render_errors: [view: MyAppWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: MyApp.PubSub,
-  live_view: [signing_salt: "kuvhKOqt"]
+  live_view: [signing_salt: "qZazrDcM"]
 
 # Configures Elixir's Logger
 config :logger, :console,

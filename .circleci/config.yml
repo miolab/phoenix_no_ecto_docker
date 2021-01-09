@@ -20,13 +20,13 @@ jobs:
           name: Mix deps.get
           command: |
             set -x
-            docker-compose run --rm app bash -c "cd my_app && ls && mix deps.get && mix deps.compile"
+            docker-compose run --rm app bash -c "ls && mix deps.get && mix deps.compile"
 
       - run:
           name: Npm install in assets directory
           command: |
             set -x
-            docker-compose run --rm app bash -c "cd my_app/assets && ls && npm install && node node_modules/webpack/bin/webpack.js --mode development"
+            docker-compose run --rm app bash -c "cd assets && ls && npm install && node node_modules/webpack/bin/webpack.js --mode development"
 
       - run:
           name: Run Docker containers
@@ -41,13 +41,13 @@ jobs:
           name: Mix format
           command: |
             set -x
-            docker-compose exec app bash -c "cd my_app && mix format --check-formatted"
+            docker-compose exec app bash -c "mix format --check-formatted"
 
       - run:
           name: Mix test
           command: |
             set -x
-            docker-compose exec app bash -c "cd my_app && mix test"
+            docker-compose exec app bash -c "mix test"
 
       - run:
           name: Down Docker containers and Finish pipeline

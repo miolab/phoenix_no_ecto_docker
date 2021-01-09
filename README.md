@@ -24,53 +24,53 @@ $ docker-compose build
 ```
 
 ```terminal
-$ docker-compose run --rm app mix phx.new my_app --no-ecto
+$ docker-compose run --rm app mix phx.new . --app my_app --no-ecto
 
-Creating network "phoenix_dev_containers_no_ecto_default" with the default driver
 Creating phoenix_dev_containers_no_ecto_app_run ... done
-* creating my_app/config/config.exs
-* creating my_app/config/dev.exs
-* creating my_app/config/prod.exs
-* creating my_app/config/prod.secret.exs
-* creating my_app/config/test.exs
-* creating my_app/lib/my_app/application.ex
-* creating my_app/lib/my_app.ex
-* creating my_app/lib/my_app_web/channels/user_socket.ex
-* creating my_app/lib/my_app_web/views/error_helpers.ex
-* creating my_app/lib/my_app_web/views/error_view.ex
-* creating my_app/lib/my_app_web/endpoint.ex
-* creating my_app/lib/my_app_web/router.ex
-* creating my_app/lib/my_app_web/telemetry.ex
-* creating my_app/lib/my_app_web.ex
-* creating my_app/mix.exs
-* creating my_app/README.md
-* creating my_app/.formatter.exs
-* creating my_app/.gitignore
-* creating my_app/test/support/channel_case.ex
-* creating my_app/test/support/conn_case.ex
-* creating my_app/test/test_helper.exs
-* creating my_app/test/my_app_web/views/error_view_test.exs
-* creating my_app/lib/my_app_web/controllers/page_controller.ex
-* creating my_app/lib/my_app_web/templates/layout/app.html.eex
-* creating my_app/lib/my_app_web/templates/page/index.html.eex
-* creating my_app/lib/my_app_web/views/layout_view.ex
-* creating my_app/lib/my_app_web/views/page_view.ex
-* creating my_app/test/my_app_web/controllers/page_controller_test.exs
-* creating my_app/test/my_app_web/views/layout_view_test.exs
-* creating my_app/test/my_app_web/views/page_view_test.exs
-* creating my_app/lib/my_app_web/gettext.ex
-* creating my_app/priv/gettext/en/LC_MESSAGES/errors.po
-* creating my_app/priv/gettext/errors.pot
-* creating my_app/assets/webpack.config.js
-* creating my_app/assets/.babelrc
-* creating my_app/assets/js/app.js
-* creating my_app/assets/css/app.scss
-* creating my_app/assets/js/socket.js
-* creating my_app/assets/package.json
-* creating my_app/assets/static/favicon.ico
-* creating my_app/assets/css/phoenix.css
-* creating my_app/assets/static/images/phoenix.png
-* creating my_app/assets/static/robots.txt
+The directory /usr/src/app already exists. Are you sure you want to continue? [Yn]
+* creating config/config.exs
+* creating config/dev.exs
+* creating config/prod.exs
+* creating config/prod.secret.exs
+* creating config/test.exs
+* creating lib/my_app/application.ex
+* creating lib/my_app.ex
+* creating lib/my_app_web/channels/user_socket.ex
+* creating lib/my_app_web/views/error_helpers.ex
+* creating lib/my_app_web/views/error_view.ex
+* creating lib/my_app_web/endpoint.ex
+* creating lib/my_app_web/router.ex
+* creating lib/my_app_web/telemetry.ex
+* creating lib/my_app_web.ex
+* creating mix.exs
+* creating README.md
+* creating .formatter.exs
+* creating .gitignore
+* creating test/support/channel_case.ex
+* creating test/support/conn_case.ex
+* creating test/test_helper.exs
+* creating test/my_app_web/views/error_view_test.exs
+* creating lib/my_app_web/controllers/page_controller.ex
+* creating lib/my_app_web/templates/layout/app.html.eex
+* creating lib/my_app_web/templates/page/index.html.eex
+* creating lib/my_app_web/views/layout_view.ex
+* creating lib/my_app_web/views/page_view.ex
+* creating test/my_app_web/controllers/page_controller_test.exs
+* creating test/my_app_web/views/layout_view_test.exs
+* creating test/my_app_web/views/page_view_test.exs
+* creating lib/my_app_web/gettext.ex
+* creating priv/gettext/en/LC_MESSAGES/errors.po
+* creating priv/gettext/errors.pot
+* creating assets/webpack.config.js
+* creating assets/.babelrc
+* creating assets/js/app.js
+* creating assets/css/app.scss
+* creating assets/js/socket.js
+* creating assets/package.json
+* creating assets/static/favicon.ico
+* creating assets/css/phoenix.css
+* creating assets/static/images/phoenix.png
+* creating assets/static/robots.txt
 
 Fetch and install dependencies? [Yn]
 * running mix deps.get
@@ -79,7 +79,7 @@ Fetch and install dependencies? [Yn]
 
 We are almost there! The following steps are missing:
 
-    $ cd my_app
+    $ cd app
 
 Start your Phoenix app with:
 
@@ -99,7 +99,7 @@ $ docker-compose ps
 
                 Name                              Command               State           Ports
 ------------------------------------------------------------------------------------------------------
-phoenix_dev_containers_no_ecto_app_1   sh -c cd my_app && mix phx ...   Up      0.0.0.0:4000->4000/tcp
+phoenix_dev_containers_no_ecto_app_1   sh -c mix phx.server --no-halt   Up      0.0.0.0:4000->4000/tcp
 ```
 
 ### ブラウザ確認
@@ -111,11 +111,11 @@ phoenix_dev_containers_no_ecto_app_1   sh -c cd my_app && mix phx ...   Up      
 ### フォーマッティングとテスト
 
 ```terminal
-$ docker-compose exec app bash -c "cd my_app && mix format"
+$ docker-compose exec app bash -c "mix format"
 ```
 
 ```terminal
-$ docker-compose exec app bash -c "cd my_app && mix test"
+$ docker-compose exec app bash -c "mix test"
 
 ...
 
@@ -131,7 +131,7 @@ Randomized with seed 213195
 
 - ルーティング設定（アップデート）
 
-  `app/my_app/lib/my_app_web/router.ex`
+  `app/lib/my_app_web/router.ex`
 
   ```elixir
   scope "/", MyAppWeb do
@@ -144,7 +144,7 @@ Randomized with seed 213195
 
 - コントローラー追加（新規作成）
 
-  `app/my_app/lib/my_app_web/controllers/watchme_controller.ex`
+  `app/lib/my_app_web/controllers/watchme_controller.ex`
 
   ```elixir
   defmodule MyAppWeb.WatchmeController do
@@ -158,7 +158,7 @@ Randomized with seed 213195
 
 - ビュー追加（新規作成）
 
-  `app/my_app/lib/my_app_web/views/watchme_view.ex`
+  `app/lib/my_app_web/views/watchme_view.ex`
 
   ```elixir
   defmodule MyAppWeb.WatchmeView do
@@ -168,7 +168,7 @@ Randomized with seed 213195
 
 - テンプレート追加（新規作成）
 
-  `app/my_app/lib/my_app_web/templates/watchme/index.html.eex`
+  `app/lib/my_app_web/templates/watchme/index.html.eex`
 
   ```html
   <section class="phx-hero">
@@ -187,17 +187,17 @@ Randomized with seed 213195
   ```
 
   ```terminal
-  $ docker-compose exec app bash -c "cd my_app && mix phx.routes"
+  $ docker-compose exec app mix phx.routes
 
-          page_path  GET  /                                      MyAppWeb.PageController :index
-      watchme_path  GET  /watchme                               MyAppWeb.WatchmeController :index
-  live_dashboard_path  GET  /dashboard                             Phoenix.LiveView.Plug :home
-  live_dashboard_path  GET  /dashboard/:page                       Phoenix.LiveView.Plug :page
-  live_dashboard_path  GET  /dashboard/:node/:page                 Phoenix.LiveView.Plug :page
-          websocket  WS   /live/websocket                        Phoenix.LiveView.Socket
-          longpoll  GET  /live/longpoll                         Phoenix.LiveView.Socket
-          longpoll  POST  /live/longpoll                         Phoenix.LiveView.Socket
-          websocket  WS   /socket/websocket                      MyAppWeb.UserSocket
+            page_path  GET  /                                      MyAppWeb.  PageController :index
+         watchme_path  GET  /watchme                               MyAppWeb.  WatchmeController :index
+  live_dashboard_path  GET  /dashboard                             Phoenix.LiveView.Plug  :home
+  live_dashboard_path  GET  /dashboard/:page                       Phoenix.LiveView.Plug  :page
+  live_dashboard_path  GET  /dashboard/:node/:page                 Phoenix.LiveView.Plug  :page
+            websocket  WS   /live/websocket                        Phoenix.LiveView.  Socket
+             longpoll  GET  /live/longpoll                         Phoenix.LiveView.  Socket
+             longpoll  POST  /live/longpoll                         Phoenix.LiveView. Socket
+            websocket  WS   /socket/websocket                      MyAppWeb.UserSocket
   ```
 
 ### ブラウザ確認
