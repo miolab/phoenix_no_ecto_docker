@@ -1,5 +1,6 @@
 FROM elixir:1.11.3-slim
 
+COPY . /usr/src/app
 WORKDIR /usr/src/app
 
 RUN apt-get update -y && \
@@ -26,4 +27,4 @@ RUN mix archive.install hex phx_new 1.5.7 --force
 
 RUN apt-get clean
 
-CMD [ "mix", "phx.server" ]
+CMD [ "mix", "phx.server --no-halt" ]
