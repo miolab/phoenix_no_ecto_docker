@@ -1,0 +1,5 @@
+build:
+  docker:
+    web: app/Dockerfile
+  config:
+    MIX_ENV: prod
