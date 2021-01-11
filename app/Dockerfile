@@ -27,4 +27,4 @@ RUN mix archive.install hex phx_new 1.5.7 --force
 
 RUN apt-get clean
 
-CMD [ "mix", "phx.server --no-halt" ]
+# CMD [ "mix", "phx.server --no-halt" ]
