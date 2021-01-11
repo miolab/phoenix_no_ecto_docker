@@ -6,4 +6,4 @@ build:
 release:
   image: web
   command:
-    - mix deps.get && mix deps.compile && cd assets && npm install && node node_modules/webpack/bin/webpack.js --mode development
+    - mix deps.get --force && mix deps.compile && cd assets && npm install && node node_modules/webpack/bin/webpack.js --mode development
