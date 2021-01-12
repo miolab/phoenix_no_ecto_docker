@@ -1,6 +1,6 @@
 FROM elixir:1.11.3-slim
 
-ENV MIX_HOME=/opt/mix
+ENV MIX_HOME=/root/.mix
 
 COPY . /usr/src/app
 WORKDIR /usr/src/app
