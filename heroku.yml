@@ -1,5 +1,3 @@
 build:
   docker:
     web: app/Dockerfile
-run:
-  web: MIX_ENV=prod mix phx.server --no-halt

@@ -1,6 +1,7 @@
 FROM elixir:1.11.3-slim
 
-ENV MIX_HOME=/root/.mix
+ENV MIX_HOME=/root/.mix \
+  MIX_ENV=prod
 
 COPY . /usr/src/app
 WORKDIR /usr/src/app
@@ -29,4 +30,4 @@ RUN mix archive.install hex phx_new 1.5.7 --force
 
 RUN apt-get clean
 
-# CMD [ "mix", "phx.server", "--no-halt" ]
+CMD [ "mix", "phx.server", "--no-halt" ]
