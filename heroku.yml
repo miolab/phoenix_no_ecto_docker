@@ -1,10 +1,5 @@
 build:
   docker:
     web: app/Dockerfile
-  config:
-    MIX_ENV: prod
-# release:
-#   command: mix local.hex --force && mix deps.get --force && mix deps.compile && cd assets && npm install && node node_modules/webpack/bin/webpack.js --mode development
-#   image: web
-# run:
-#   web: mix phx.server --no-halt
+run:
+  web: MIX_ENV=prod mix phx.server --no-halt
