@@ -47,7 +47,7 @@ jobs:
           name: Mix test
           command: |
             set -x
-            docker-compose exec app bash -c "mix test"
+            docker-compose exec app bash -c "MIX_ENV=test mix test"
 
       - run:
           name: Down Docker containers and Finish pipeline
