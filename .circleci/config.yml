@@ -1,4 +1,19 @@
 version: 2.1
+orbs:
+  heroku: circleci/heroku@1.2.4
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          # filters:
+          #   branches:
+          #     only: master
+
 jobs:
   build:
     machine:
@@ -60,3 +75,11 @@ jobs:
           command: |
             set -x
             echo "Finished build."
+
+  deploy:
+    executor: heroku/default
+    steps:
+      - checkout
+      - heroku/install
+      - heroku/push-docker-image
+      - heroku/release-docker-image
