@@ -29,6 +29,12 @@ jobs:
             docker-compose run --rm app bash -c "cd assets && ls && npm install && node node_modules/webpack/bin/webpack.js --mode development"
 
       - run:
+          name: Mix phx.digest
+          command: |
+            set -x
+            docker-compose run --rm app mix phx.digest
+
+      - run:
           name: Run Docker containers
           command: |
             set -x
@@ -47,11 +53,10 @@ jobs:
           name: Mix test
           command: |
             set -x
-            docker-compose exec app bash -c "mix test"
+            docker-compose exec app bash -c "MIX_ENV=test mix test"
 
       - run:
-          name: Down Docker containers and Finish pipeline
+          name: Finish build
           command: |
             set -x
-            docker-compose down --rmi all --volumes --remove-orphans
-            echo "Finish pipeline"
+            echo "Finished build."

@@ -1,5 +1,10 @@
 FROM elixir:1.11.3-slim
 
+ENV MIX_HOME=/root/.mix \
+  MIX_ENV=prod \
+  SECRET_KEY_BASE=${SECRET_KEY_BASE}
+
+COPY . /usr/src/app
 WORKDIR /usr/src/app
 
 RUN apt-get update -y && \
@@ -20,10 +25,10 @@ RUN n 14.15.4
 RUN apt-get purge -y nodejs npm
 RUN node -v && npm -v
 
-RUN yes | mix local.hex
+RUN mix local.hex --force
 RUN mix local.rebar --force
 RUN mix archive.install hex phx_new 1.5.7 --force
 
 RUN apt-get clean
 
-CMD [ "mix", "phx.server" ]
+CMD [ "mix", "phx.server", "--no-halt" ]

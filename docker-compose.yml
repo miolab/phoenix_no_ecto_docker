@@ -6,6 +6,9 @@ services:
       - ./app:/usr/src/app
     ports:
       - ${PHOENIX_PORT}:4000
+    environment:
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+      - PORT=${PHOENIX_PORT}
     stdin_open: true
     tty: true
     command:

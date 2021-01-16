@@ -10,7 +10,7 @@ use Mix.Config
 # Configures the endpoint
 config :my_app, MyAppWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "2NnogwR6HJV/09fgVhl4d1H/si+VIR9JIA+5cm2qAw7sWVQU8aZ6kslb40yk4qZz",
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
   render_errors: [view: MyAppWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: MyApp.PubSub,
   live_view: [signing_salt: "qZazrDcM"]
