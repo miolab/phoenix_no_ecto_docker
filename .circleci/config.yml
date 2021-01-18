@@ -85,8 +85,8 @@ jobs:
           command: |
             set -x
             heroku container:login
-            pwd && cd app && ls
-            heroku container:push -a $HEROKU_APP_NAME
+            pwd && ls
+            heroku container:push -a $HEROKU_APP_NAME --recursive
             heroku container:release -a $HEROKU_APP_NAME
       - run:
           name: Finish deploy
