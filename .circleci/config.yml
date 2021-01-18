@@ -17,8 +17,6 @@ jobs:
   build:
     machine:
       image: ubuntu-1604:202010-01
-    environment:
-      HEROKU_APP_NAME: "containers-no-ecto"
     steps:
       - checkout
       - run:
@@ -80,5 +78,6 @@ jobs:
             docker-compose ps
             docker-compose logs
       - heroku/install
-      - heroku/push-docker-image
+      - heroku/push-docker-image:
+          recursive: true
       - heroku/release-docker-image
