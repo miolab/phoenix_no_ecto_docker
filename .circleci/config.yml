@@ -69,8 +69,8 @@ jobs:
   deploy:
     executor: heroku/default
     steps:
-      - checkout
       - setup_remote_docker
+      - checkout
       - run:
           name: Check Docker status
           command: |
@@ -79,8 +79,17 @@ jobs:
             docker-compose ps
             docker-compose logs
       - heroku/install
-      - heroku/push-docker-image:
-          recursive: true
+      - run:
+          name: Heroku login, push, release
           working_directory: app
-      - heroku/release-docker-image:
-          working_directory: app
+          command: |
+            set -x
+            heroku container:login
+            pwd && cd app && ls
+            heroku container:push -a $HEROKU_APP_NAME
+            heroku container:release -a $HEROKU_APP_NAME
+      - run:
+          name: Finish deploy
+          command: |
+            set -x
+            echo "Finished deploy."
