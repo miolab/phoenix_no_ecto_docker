@@ -6,9 +6,9 @@ workflows:
       - deploy:
           requires:
             - build
-          # filters:
-          #   branches:
-          #     only: master
+          filters:
+            branches:
+              only: master
 
 version: 2.1
 orbs:
@@ -71,13 +71,6 @@ jobs:
     steps:
       - setup_remote_docker
       - checkout
-      - run:
-          name: Check Docker status
-          command: |
-            set -x
-            ls
-            docker-compose ps
-            docker-compose logs
       - heroku/install
       - run:
           name: Heroku login, push, release
