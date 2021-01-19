@@ -115,7 +115,7 @@ $ docker-compose exec app bash -c "mix format"
 ```
 
 ```terminal
-$ docker-compose exec app bash -c "mix test"
+$ docker-compose exec app bash -c "MIX_ENV=test mix test"
 
 ...
 
