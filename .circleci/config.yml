@@ -28,7 +28,7 @@ jobs:
             docker-compose run --rm app mix archive
             docker-compose run --rm app bash -c "node --version && npm --version"
       - run:
-          name: Mix deps.get
+          name: Mix deps.get & compile
           command: |
             set -x
             docker-compose run --rm app bash -c "ls && mix deps.get && mix deps.compile"
@@ -72,8 +72,9 @@ jobs:
       - setup_remote_docker
       - checkout
       - heroku/install
+      - heroku/deploy-via-git
       - run:
-          name: Heroku login, push, release
+          name: Heroku container login, push, release
           working_directory: app
           command: |
             set -x
