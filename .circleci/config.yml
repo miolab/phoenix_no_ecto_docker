@@ -70,9 +70,10 @@ jobs:
     executor: heroku/default
     steps:
       - setup_remote_docker
-      - checkout
       - heroku/install
-      - heroku/deploy-via-git
+      - heroku/check-authentication
+      - checkout
+      # - heroku/deploy-via-git
       - run:
           name: Heroku container login, push, release
           working_directory: app
