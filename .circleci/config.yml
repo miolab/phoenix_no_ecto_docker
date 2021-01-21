@@ -54,7 +54,7 @@ jobs:
           name: Exist mix dependencies
           command: |
             set -x
-            ls
+            ls app/deps
             docker-compose exec app bash -c "mix deps"
       - run:
           name: Mix format
@@ -79,7 +79,7 @@ jobs:
       - heroku/install
       - heroku/check-authentication
       - checkout
-      - heroku/deploy-via-git
+      # - heroku/deploy-via-git
       - run:
           name: Heroku container login, push, release
           working_directory: app
