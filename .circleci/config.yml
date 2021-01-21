@@ -79,14 +79,19 @@ jobs:
       - heroku/install
       - heroku/check-authentication
       - checkout
-      # - heroku/deploy-via-git
+      - run:
+          name: Check directory after checkout
+          command: |
+            set -x
+            pwd && ls -a
+      - heroku/deploy-via-git
       - run:
           name: Heroku container login, push, release
           working_directory: app
           command: |
             set -x
+            pwd && ls -a
             heroku container:login
-            pwd && ls
             heroku container:push web -a $HEROKU_APP_NAME
             heroku container:release web -a $HEROKU_APP_NAME
       - run:
