@@ -78,8 +78,7 @@ jobs:
             echo "Finished build."
 
   deploy:
-    executor:
-      name: machine-executor
+    executor: machine-executor
       # heroku/default
       # machine:
       #   image: ubuntu-1604:202010-01
@@ -93,7 +92,7 @@ jobs:
           command: |
             set -x
             pwd && ls -a && ls -a app
-      # - heroku/deploy-via-git
+      - heroku/deploy-via-git
       - run:
           name: Heroku container login, push, release
           working_directory: app
