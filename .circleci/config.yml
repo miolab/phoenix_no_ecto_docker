@@ -11,12 +11,17 @@ workflows:
           #     only: master
 
 version: 2.1
+executors:
+  machine-executor:
+    machine:
+      image: ubuntu-1604:202010-01
 orbs:
   heroku: circleci/heroku@1.2.4
 jobs:
   build:
-    machine:
-      image: ubuntu-1604:202010-01
+    # machine:
+    #   image: ubuntu-1604:202010-01
+    executor: machine-executor
     steps:
       - checkout
       - run:
@@ -73,9 +78,13 @@ jobs:
             echo "Finished build."
 
   deploy:
-    executor: heroku/default
+    executor:
+      name: machine-executor
+      # heroku/default
+      # machine:
+      #   image: ubuntu-1604:202010-01
     steps:
-      - setup_remote_docker
+      # - setup_remote_docker
       - checkout
       - heroku/install
       - heroku/check-authentication
