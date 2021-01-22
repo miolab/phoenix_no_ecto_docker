@@ -76,21 +76,20 @@ jobs:
     executor: heroku/default
     steps:
       - setup_remote_docker
+      - checkout
       - heroku/install
       - heroku/check-authentication
-      - checkout
       - run:
           name: Check directory after checkout
           command: |
             set -x
-            pwd && ls -a
-      - heroku/deploy-via-git
+            pwd && ls -a && ls -a app
+      # - heroku/deploy-via-git
       - run:
           name: Heroku container login, push, release
           working_directory: app
           command: |
             set -x
-            pwd && ls -a
             heroku container:login
             heroku container:push web -a $HEROKU_APP_NAME
             heroku container:release web -a $HEROKU_APP_NAME
