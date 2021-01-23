@@ -55,10 +55,10 @@ jobs:
             docker ps -f status=running
             docker-compose logs
       - run:
-          name: Exist mix dependencies
+          name: Check about exist mix dependencies
           command: |
             set -x
-            ls app/deps
+            pwd && ls app/deps
             docker-compose exec app bash -c "mix deps"
       - run:
           name: Mix format
