@@ -55,12 +55,6 @@ jobs:
             docker ps -f status=running
             docker-compose logs
       - run:
-          name: Check about exist mix dependencies
-          command: |
-            set -x
-            pwd && ls app/deps
-            docker-compose exec app bash -c "mix deps"
-      - run:
           name: Mix format
           command: |
             set -x
@@ -70,6 +64,16 @@ jobs:
           command: |
             set -x
             docker-compose exec app bash -c "MIX_ENV=test mix test"
+      - run:
+          name: Check about exist mix dependencies
+          command: |
+            set -x
+            pwd && ls -a && ls -a app && app/deps
+            docker-compose exec app bash -c "mix deps"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
       - run:
           name: Finish build
           command: |
@@ -81,6 +85,8 @@ jobs:
       name: machine-executor
     steps:
       - checkout
+      - attach_workspace:
+          at: .
       - heroku/install
       - heroku/check-authentication
       - run:
