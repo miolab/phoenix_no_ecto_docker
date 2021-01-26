@@ -68,7 +68,7 @@ jobs:
           name: Check about exist mix dependencies
           command: |
             set -x
-            pwd && ls -a && ls -a app && app/deps
+            pwd && ls -a && ls -a app && ls app/deps
             docker-compose exec app bash -c "mix deps"
       - persist_to_workspace:
           root: .
