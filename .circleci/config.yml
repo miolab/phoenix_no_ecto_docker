@@ -16,9 +16,9 @@ workflows:
       - deploy:
           requires:
             - build
-          # filters:
-          #   branches:
-          #     only: master
+          filters:
+            branches:
+              only: master
 
 jobs:
   build:
@@ -82,7 +82,7 @@ jobs:
           name: Finish build
           command: |
             set -x
-            echo "Finished build."
+            echo "Finish build"
   deploy:
     executor:
       name: machine-executor
@@ -110,4 +110,4 @@ jobs:
           name: Finish deploy
           command: |
             set -x
-            echo "Finished deploy."
+            echo "Finish deploy"
