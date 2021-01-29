@@ -1,20 +1,12 @@
 # Phoenix
 # https://github.com/phoenixframework/phoenix/blob/master/.gitignore
-/_build
-/deps
-/doc
-/tmp
-/node_modules
+*/_build
+*/deps
+*/doc
+*/tmp
+*/node_modules
 
-/assets/node_modules
-
-/installer/_build
-/installer/tmp
-/installer/doc
-/installer/deps
-
-/integration_test/_build
-/integration_test/deps
+*/assets/node_modules
 
 erl_crash.dump
 
@@ -25,6 +17,7 @@ erl_crash.dump
 *.ez
 *.beam
 /app/config/prod.secret.exs
+
 .elixir_ls/
 
 # User setting

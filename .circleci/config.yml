@@ -1,3 +1,13 @@
+version: 2.1
+
+executors:
+  machine-executor:
+    machine:
+      image: ubuntu-1604:202010-01
+
+orbs:
+  heroku: circleci/heroku@1.2.4
+
 workflows:
   version: 2
   build-deploy:
@@ -10,13 +20,10 @@ workflows:
             branches:
               only: master
 
-version: 2.1
-orbs:
-  heroku: circleci/heroku@1.2.4
 jobs:
   build:
-    machine:
-      image: ubuntu-1604:202010-01
+    executor:
+      name: machine-executor
     steps:
       - checkout
       - run:
@@ -24,11 +31,10 @@ jobs:
           command: |
             set -x
             docker-compose build
-            docker-compose run --rm app bash -c "mix --version"
-            docker-compose run --rm app mix archive
+            docker-compose run --rm app bash -c "mix --version && mix archive"
             docker-compose run --rm app bash -c "node --version && npm --version"
       - run:
-          name: Mix deps.get
+          name: Mix deps.get & compile
           command: |
             set -x
             docker-compose run --rm app bash -c "ls && mix deps.get && mix deps.compile"
@@ -61,28 +67,48 @@ jobs:
             set -x
             docker-compose exec app bash -c "MIX_ENV=test mix test"
       - run:
+          name: Check directories and existed mix dependencies
+          command: |
+            set -x
+            pwd && ls -a && ls -a app && ls app/deps
+            docker-compose exec app bash -c "mix deps"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./app/deps
+            - ./app/_build
+            - ./app/priv
+            - ./app/assets/node_modules
+      - run:
           name: Finish build
           command: |
             set -x
-            echo "Finished build."
-
+            echo "Finish build"
   deploy:
-    executor: heroku/default
+    executor:
+      name: machine-executor
     steps:
-      - setup_remote_docker
       - checkout
-      - heroku/install
+      - attach_workspace:
+          at: .
       - run:
-          name: Heroku login, push, release
+          name: Check directories/files
+          command: |
+            set -x
+            pwd && ls -a && ls app
+      - heroku/install
+      - heroku/check-authentication
+      - run:
+          name: Heroku container login, push, release
           working_directory: app
           command: |
             set -x
+            ls -a
             heroku container:login
-            pwd && ls
             heroku container:push web -a $HEROKU_APP_NAME
             heroku container:release web -a $HEROKU_APP_NAME
       - run:
           name: Finish deploy
           command: |
             set -x
-            echo "Finished deploy."
+            echo "Finish deploy"
