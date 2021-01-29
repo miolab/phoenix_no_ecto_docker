@@ -78,6 +78,7 @@ jobs:
             - ./app/deps
             - ./app/_build
             - ./app/priv
+            - ./app/assets/node_modules
       - run:
           name: Finish build
           command: |
