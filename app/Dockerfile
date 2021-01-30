@@ -28,7 +28,6 @@ RUN node -v && npm -v
 RUN mix local.hex --force && \
   mix local.rebar --force
 RUN mix archive.install hex phx_new 1.5.7 --force
-RUN mix phx.digest
 
 RUN apt-get clean
 
